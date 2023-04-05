@@ -1,13 +1,12 @@
 import React, {useState} from 'react';
 import {
   View,
-  Text,
   TextInput,
   FlatList,
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-
+import ASText from '../../generic/ASText/ASText';
 type HubStatus = 'NEW' | 'ACTIVE' | 'SUSPENDED';
 
 interface Hub {
@@ -60,21 +59,21 @@ const HubManager: React.FC = () => {
 
   return (
     <View style={styles.hubManagerContainer}>
-      <Text style={styles.title}>Hub Manager</Text>
-      <Text style={styles.inputLabel}>Serial No:</Text>
+      <ASText style={styles.title}>Hub Manager</ASText>
+      <ASText style={styles.inputLabel}>Serial No:</ASText>
       <TextInput
         style={styles.hubInput}
         value={serialNo}
         onChangeText={text => setSerialNo(text)}
       />
-      <Text style={styles.inputLabel}>Status:</Text>
+      <ASText style={styles.inputLabel}>Status:</ASText>
       <TextInput
         style={styles.hubInput}
         value={status}
         onChangeText={text => setStatus(text as HubStatus)}
       />
       <TouchableOpacity style={styles.hubButton} onPress={addHub}>
-        <Text>Add Hub</Text>
+        <ASText>Add Hub</ASText>
       </TouchableOpacity>
       <FlatList
         data={hubs}
@@ -86,20 +85,22 @@ const HubManager: React.FC = () => {
               item.status === 'SUSPENDED' && styles.suspendedHubItem,
               item.status === 'ACTIVE' && styles.activeHubItem,
             ]}>
-            <Text style={styles.hubSerialNo}>Serial No: {item.serialNo}</Text>
-            <Text>Status: {item.status}</Text>
-            <Text>Status Date: {item.statusDate}</Text>
+            <ASText style={styles.hubSerialNo}>
+              Serial No: {item.serialNo}
+            </ASText>
+            <ASText>Status: {item.status}</ASText>
+            <ASText>Status Date: {item.statusDate}</ASText>
             <TouchableOpacity
               style={[styles.hubButton, styles.activateButon]}
               onPress={() => activateHub(item.serialNo)}
               disabled={item.status === 'ACTIVE'}>
-              <Text>Activate</Text>
+              <ASText>Activate</ASText>
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.hubButton, styles.suspendButton]}
               onPress={() => suspendHub(item.serialNo)}
               disabled={item.status === 'SUSPENDED'}>
-              <Text>Suspend</Text>
+              <ASText>Suspend</ASText>
             </TouchableOpacity>
           </View>
         )}
