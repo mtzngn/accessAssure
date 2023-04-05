@@ -81,22 +81,24 @@ const HubManager: React.FC = () => {
         keyExtractor={item => item.serialNo}
         renderItem={({item}) => (
           <View
-            style={
-              item.status != 'SUSPENDED'
-                ? styles.hubItem
-                : styles.suspendedHubItem
-            }>
+            style={[
+              styles.hubItem,
+              item.status === 'SUSPENDED' && styles.suspendedHubItem,
+              item.status === 'ACTIVE' && styles.activeHubItem,
+            ]}>
             <Text style={styles.hubSerialNo}>Serial No: {item.serialNo}</Text>
             <Text>Status: {item.status}</Text>
             <Text>Status Date: {item.statusDate}</Text>
             <TouchableOpacity
-              style={styles.hubButton}
-              onPress={() => activateHub(item.serialNo)}>
+              style={[styles.hubButton, styles.activateButon]}
+              onPress={() => activateHub(item.serialNo)}
+              disabled={item.status === 'ACTIVE'}>
               <Text>Activate</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={styles.hubButton}
-              onPress={() => suspendHub(item.serialNo)}>
+              style={[styles.hubButton, styles.suspendButton]}
+              onPress={() => suspendHub(item.serialNo)}
+              disabled={item.status === 'SUSPENDED'}>
               <Text>Suspend</Text>
             </TouchableOpacity>
           </View>
@@ -116,16 +118,15 @@ const styles = StyleSheet.create({
   hubItem: {
     borderWidth: 1,
     borderRadius: 4,
-    borderColor: 'lightblue',
+    borderColor: '#222831',
     padding: 10,
     marginVertical: 5,
   },
   suspendedHubItem: {
-    borderWidth: 1,
-    borderRadius: 4,
-    borderColor: 'red',
-    padding: 10,
-    marginVertical: 5,
+    borderColor: '#F38181',
+  },
+  activeHubItem: {
+    borderColor: '#00ADB5',
   },
   hubSerialNo: {
     fontWeight: 'bold',
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
   },
   hubInput: {
     borderWidth: 1,
-    borderColor: 'lightblue',
+    borderColor: '#00ADB5',
     borderRadius: 4,
     padding: 10,
     marginBottom: 10,
@@ -145,9 +146,15 @@ const styles = StyleSheet.create({
   hubButton: {
     padding: 10,
     marginBottom: 5,
-    backgroundColor: 'lightblue',
+    backgroundColor: '#00ADB5',
     display: 'flex',
     alignItems: 'center',
+  },
+  activateButon: {
+    backgroundColor: '#00ADB5',
+  },
+  suspendButton: {
+    backgroundColor: '#F38181',
   },
   title: {
     alignSelf: 'center',
