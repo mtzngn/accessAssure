@@ -7,9 +7,14 @@
 
 import React from 'react';
 import {SafeAreaView} from 'react-native';
+import HubManager from './src/components/HubManager/HubManager';
 
-function App(): JSX.Element {
-  return <SafeAreaView></SafeAreaView>;
-}
+const App: React.FC = () => {
+  return (
+    <SafeAreaView>
+      <HubManager />
+    </SafeAreaView>
+  );
+};
 
 export default App;
