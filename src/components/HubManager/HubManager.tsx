@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, FlatList, StyleSheet} from 'react-native';
+import {View, FlatList, StyleSheet, Alert} from 'react-native';
 import ASText from '../../generic/ASText/ASText';
 import HubItem from '../HubItem/HubItem';
 import AddHubForm from '../AddHubForm/AddHubForm';
@@ -18,6 +18,13 @@ const HubManager: React.FC = () => {
   const [status, setStatus] = useState<HubStatus>('NEW');
 
   const addHub = () => {
+    // Check if serialNo already exists in the array
+    const isDuplicateSerialNo = hubs.some(hub => hub.serialNo === serialNo);
+
+    if (isDuplicateSerialNo) {
+      Alert.alert('Error', 'A hub with this serial number already exists.');
+      return;
+    }
     const newHub: Hub = {
       serialNo: serialNo,
       status: status,
