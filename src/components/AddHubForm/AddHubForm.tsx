@@ -1,23 +1,14 @@
 import React from 'react';
 import {View, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
 import ASText from '../../generic/ASText/ASText';
-import {HubStatus} from '../HubManager/HubManager';
 
 type Props = {
   serialNo: string;
-  status: string;
   setSerialNo: (text: string) => void;
-  setStatus: (text: HubStatus) => void;
   addHub: () => void;
 };
 
-const AddHubForm = ({
-  serialNo,
-  status,
-  setSerialNo,
-  setStatus,
-  addHub,
-}: Props) => {
+const AddHubForm = ({serialNo, setSerialNo, addHub}: Props) => {
   return (
     <View>
       <ASText style={styles.inputLabel}>Serial No:</ASText>
@@ -25,12 +16,6 @@ const AddHubForm = ({
         style={styles.hubInput}
         value={serialNo}
         onChangeText={text => setSerialNo(text)}
-      />
-      <ASText style={styles.inputLabel}>Status:</ASText>
-      <TextInput
-        style={styles.hubInput}
-        value={status}
-        onChangeText={text => setStatus(text as HubStatus)}
       />
       <TouchableOpacity style={styles.hubButton} onPress={addHub}>
         <ASText>Add Hub</ASText>
