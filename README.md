@@ -8,6 +8,9 @@ Before you can run the app, you need to install its dependencies. To do this, op
 `yarn install`
 
 This will install all the required dependencies for the app.
+To install the dependecies for iOS run below command as well, this is not required for Android.
+
+`yarn run cocoapods`
 
 Step 2: Run the app
 Open a terminal window in the root directory of the project and run the following command:
