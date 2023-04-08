@@ -12,7 +12,6 @@ const ASText = ({children, style}: Props) => {
 
 const styles = StyleSheet.create({
   text: {
-    fontFamily: 'sans-serif',
     fontWeight: '400',
     fontSize: 13,
   },
