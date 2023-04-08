@@ -17,11 +17,17 @@ const HubManager: React.FC = () => {
   const [serialNo, setSerialNo] = useState<string>('');
 
   const addHub = () => {
-    // Check if serialNo already exists in the array
+    // Check if serialNo already exists in the array.
     const isDuplicateSerialNo = hubs.some(hub => hub.serialNo === serialNo);
 
     if (isDuplicateSerialNo) {
       Alert.alert('Error', 'A hub with this serial number already exists.');
+      return;
+    }
+
+    // Check if serialNo is entered.
+    if (serialNo.length == 0) {
+      Alert.alert('Error', 'Please enter the serial number.');
       return;
     }
     const newHub: Hub = {
